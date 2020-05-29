@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>liu-boss</title>
+  
+  <subtitle>天上人间</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://github.com/liu-boss/liu-boss.github.io.git/"/>
+  <updated>2020-05-28T06:20:34.380Z</updated>
+  <id>https://github.com/liu-boss/liu-boss.github.io.git/</id>
+  
+  <author>
+    <name>liu-boss</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot打包部署-1</title>
+    <link href="https://github.com/liu-boss/liu-boss.github.io.git/2020/05/28/springboot%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2-1/"/>
+    <id>https://github.com/liu-boss/liu-boss.github.io.git/2020/05/28/springboot%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2-1/</id>
+    <published>2020-05-28T06:20:34.316Z</published>
+    <updated>2020-05-28T06:20:34.380Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: Spring Boot项目部署<br>abbrlink: 16107</p><hr><h1 id="SpringBoot项目部署"><a href="#SpringBoot项目部署" class="headerlink" title="SpringBoot项目部署"></a>SpringBoot项目部署</h1><ul><li>执行命令  nohub java -jar 运行项目名称 &amp;<br>nohub项目挂起，告诉服务器一直运行。&amp; 在后台运行  </li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;title: Spring Boot项目部署&lt;br&gt;abbrlink: 16107&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;SpringBoot项目部署&quot;&gt;&lt;a href=&quot;#SpringBoot项目部署&quot; class=&quot;headerlink&quot; title=&quot;Sprin
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot注解大全</title>
+    <link href="https://github.com/liu-boss/liu-boss.github.io.git/2020/05/27/Spring%20Boot%E6%B3%A8%E8%A7%A3%E5%A4%A7%E5%85%A8/"/>
+    <id>https://github.com/liu-boss/liu-boss.github.io.git/2020/05/27/Spring%20Boot%E6%B3%A8%E8%A7%A3%E5%A4%A7%E5%85%A8/</id>
+    <published>2020-05-27T10:25:57.243Z</published>
+    <updated>2020-05-27T11:20:15.114Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: Spring Boot注解大全<br>abbrlink: 16107</p><hr><p>一、注解(annotations)列表</p><ul><li>@SpringBootApplication：包含了@ComponentScan、@Configuration和@EnableAutoConfiguration注解.<br>其中@ComponentScan让spring Boot扫描到Configuration类并把它加入到程序上下文。  <ul><li>@Configuration 等同于spring的XML配置文件；使用Java代码可以检查类型安全。  </li><li>@EnableAutoConfiguration 自动配置。  </li><li>@ComponentScan 组件扫描，可自动发现和装配一些Bean。   </li><li>@Component可配合CommandLineRunner使用，在程序启动后执行一些基础任务.  </li></ul></li></ul><p>@ RestController注解是@Controller和@ResponseBody的合集,表示这是个控制器bean,<br>并且是将函数的返回值直接填入HTTP响应体中,是REST风格的控制器。</p><ul><li><p>@Autowired自动导入.  </p><ul><li>@PathVariable获取参数。  </li><li>@JsonBackReference解决嵌套外链问题。  </li><li>@RepositoryRestResourcepublic配合spring-boot-starter-data-rest使用。  <h3 id="二、注解-annotations-详解"><a href="#二、注解-annotations-详解" class="headerlink" title="二、注解(annotations)详解"></a>二、注解(annotations)详解</h3></li><li>@SpringBootApplication：申明让spring boot自动给程序进行必要的配置，这个配置等同于：<br>@Configuration ，@EnableAutoConfiguration 和 @ComponentScan 三个配置。<pre><code>package com.example.myproject;  import org.springframework.boot.SpringApplication;  import org.springframework.boot.autoconfigure.SpringBootApplication;  @SpringBootApplication // same as @Configuration   @EnableAutoConfiguration  @ComponentScanpublic class Application {     public static void main(String[] args) {          SpringApplication.run(Application.class, args);     }  }</code></pre></li><li>@ResponseBody：表示该方法的返回结果直接写入HTTP response body中，一般在异步获取数据时使用，<br>用于构建RESTful的api。在使用@RequestMapping后，返回值通常解析为跳转路径，加上<br>@responsebody后返回结果不会被解析为跳转路径，而是直接写入HTTP response body中。<br>比如异步获取json数据，加上@responsebody后，会直接返回json数据。<br>该注解一般会配合@RequestMapping一起使用。示例代码：<pre><code>@RequestMapping(“/test”)  @ResponseBodypublic String test()  {      return”ok”;  }</code></pre></li><li>@Controller：用于定义控制器类，在spring 项目中由控制器负责将用户发来的URL请求转发到对应的服务接口<br>（service层）一般这个注解在类中，通常方法需要配合注解@RequestMapping。示例代码：<pre><code>@Controller@RequestMapping(“/demoInfo”)publicclass DemoController {@Autowiredprivate DemoInfoService demoInfoService;</code></pre></li></ul><p>@RequestMapping(“/hello”)<br>public String hello(Map map){</p><pre><code>System.out.println("DemoController.hello()");map.put("hello","from TemplateController.helloHtml");//会使用hello.html或者hello.ftl模板进行渲染显示.return"/hello";</code></pre><p>}<br>}</p><pre><code>*  @RestController：用于标注控制层组件(如struts中的action)，@ResponseBody和      @Controller的合集。示例代码：</code></pre><p>package com.kfit.demo.web;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.RestController;<br>@RestController<br>@RequestMapping(“/demoInfo2”)<br>publicclass DemoController2 {<br>@RequestMapping(“/test”)<br>public String test(){ </p><pre><code>return"ok";   }</code></pre><p> }</p><pre><code>* @RequestMapping：提供路由信息，负责URL到Controller中的具体函数的映射。  </code></pre></li></ul><p>@EnableAutoConfiguration：Spring Boot自动配置（auto-configuration）：尝试根据你添加的jar依赖自动配置你的Spring应用.<br>例如，如果你的classpath下存在HSQLDB，并且你没有手动配置任何数据库连接beans，<br>那么我们将自动配置一个内存型（in-memory）数据库”。<br>你可以将@EnableAutoConfiguration或者@SpringBootApplication注解添加到一个<br>@Configuration类上来选择自动配置。<br>如果发现应用了你不想要的特定自动配置类，你可以使用<br>@EnableAutoConfiguration注解的排除属性来禁用它们。<br>@ComponentScan：表示将该类自动发现扫描组件.<br>个人理解相当于，如果扫描到有@Component、@Controller、@Service等这些注解的类，并注册为Bean，<br>可以自动收集所有的Spring组件，包括@Configuration类。<br>我们经常使用<br>@ComponentScan注解搜索beans，并结合@Autowired注解导入。<br>可以自动收集所有的Spring组件，包括@Configuration类。<br>如果没有配置的话，Spring Boot会扫描启动类所在包下以及子包下的使用了@Service,@Repository等注解的类。  </p><ul><li>@Configuration：相当于传统的xml配置文件，如果有些第三方库需要用到xml文件，<br>建议仍然通过@Configuration类作为项目的配置主类——可以使用*        </li><li>@ImportResource注解加载xml配置文件。<br>@Import：用来导入其他配置类。  </li></ul><p>@ImportResource：用来加载xml配置文件。<br>@Autowired：自动导入依赖的bean  </p><p>@Service：一般用于修饰service层的组件<br>@Repository：使用@Repository注解可以确保DAO或者repositories提供异常转译，  </p><p>这个注解修饰的DAO或者repositories类会被ComponetScan发现并配置，<br>同时也不需要为它们提供XML配置项。<br>@Bean：用@Bean标注方法等价于XML中配置的bean。<br>@Value：注入Spring boot application.properties配置的属性的值。<br>示例代码：</p><pre><code>@Value(value = “#{message}”)private String message;</code></pre><ul><li>@Inject：等价于默认的@Autowired，只是没有required属性；<br>@Component：泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。<br>@Bean：相当于XML中的,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理。<br>@AutoWired：自动导入依赖的bean。byType方式。把配置好的Bean拿来用，完成属性、方法的组装，它可以对类成员变量,<br>方法及构造函数进行标注，完成自动装配的工作。当加上（required=false）时，就算找不到bean也不报错。<br>@Qualifier：当有多个同一类型的Bean时，可以用@Qualifier(“name”)来指定。与@Autowired配合使用。<br>@Qualifier限定描述符除了能根据名字进行注入，但能进行更细粒度的控制如何选择候选者，具体使用方式如下：<pre><code>@Autowired@Qualifier(value = “demoInfoService”)private DemoInfoService demoInfoService;</code></pre></li><li>@Resource(name=”name”,type=”type”)：没有括号内内容的话，默认byName。与@Autowired干类似的事。  <h3 id="三、JPA注解"><a href="#三、JPA注解" class="headerlink" title="三、JPA注解"></a>三、JPA注解</h3></li><li>@Entity：@Table(name=”“)：表明这是一个实体类。一般用于jpa这两个注解一般一块使用,<br>但是如果表名和实体类名相同的话，@Table可以省略<br>@MappedSuperClass:用在确定是父类的entity上。父类的属性子类可以继承。<br>@NoRepositoryBean:一般用作父类的repository，有这个注解，spring不会去实例化该repository。<br>@Column：如果字段名与列名相同，则可以省略。<br>@Id：表示该属性为主键。<br>@GeneratedValue(strategy=GenerationType.SEQUENCE,generator= “repair_seq”)：<br>表示主键生成策略是sequence（可以为Auto、IDENTITY、native等，Auto表示可在多个数据库间切换），<br>指定sequence的名字是repair_seq。<br>@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1)：<br>name为sequence的名称，以便使用，sequenceName为数据库的sequence名称，两个名称可以一致。<br>@Transient：表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性。<br>如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic。<br>@Basic(fetch=FetchType.LAZY)：标记可以指定实体属性的加载方式<br>@JsonIgnore：作用是json序列化时将Java bean中的一些属性忽略掉,序列化和反序列化都受影响。<br>@JoinColumn（name=”loginId”）:一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。<br>@OneToOne、@OneToMany、@ManyToOne：对应hibernate配置文件中的一对一，一对多，多对一。  <h3 id="四、springMVC相关注解"><a href="#四、springMVC相关注解" class="headerlink" title="四、springMVC相关注解"></a>四、springMVC相关注解</h3></li><li>@RequestMapping：@RequestMapping(“/path”)表示该控制器处理所有“/path”的UR L请求。<br>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。<br>用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。该注解有六个属性：<br>params:指定request中必须包含某些参数值是，才让该方法处理。<br>headers:指定request中必须包含某些指定的header值，才能让该方法处理请求。<br>value:指定请求的实际地址，指定的地址可以是URI Template 模式<br>method:指定请求的method类型， GET、POST、PUT、DELETE等<br>consumes:指定处理请求的提交内容类型（Content-Type），如application/json,text/html;<br>produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回<br>@RequestParam：用在方法的参数前面。<br>@RequestParam<br>String a =request.getParameter(“a”)。<br>@PathVariable:路径变量。如<pre><code>RequestMapping(“user/get/mac/{macAddress}”)public String getByMacAddress(@PathVariable String macAddress){ //do something;}</code></pre>参数与大括号里的名字一样要相同。  <h3 id="五、全局异常处理"><a href="#五、全局异常处理" class="headerlink" title="五、全局异常处理"></a>五、全局异常处理</h3></li><li>@ControllerAdvice：包含@Component。可以被扫描到。统一处理异常。<br>@ExceptionHandler（Exception.class）：用在方法上面表示遇到这个异常就执行以下方法。</li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;title: Spring Boot注解大全&lt;br&gt;abbrlink: 16107&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;一、注解(annotations)列表&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;@SpringBootApplication：包含了@ComponentScan、@Con
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux基本命令</title>
+    <link href="https://github.com/liu-boss/liu-boss.github.io.git/2020/05/27/%E2%80%8CLinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
+    <id>https://github.com/liu-boss/liu-boss.github.io.git/2020/05/27/%E2%80%8CLinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</id>
+    <published>2020-05-27T09:53:32.516Z</published>
+    <updated>2020-05-27T09:57:59.037Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux基本命令"><a href="#Linux基本命令" class="headerlink" title="Linux基本命令"></a>Linux基本命令</h1><h3 id="1-基本命令"><a href="#1-基本命令" class="headerlink" title="1.基本命令"></a>1.基本命令</h3><ul><li>ls  列出目录</li><li>cd 切换目录</li><li>pwd  显示当前的目录</li><li>mkdir 创建一个新的目录</li><li>cp 复制文件或目录</li><li>mv 移动文件与目录，或修改文件与目录的名称，你可以使用man【命令】来查看各个命令的使用文档，如：man cp  <blockquote><p>ls  在linux中ls是最常被运行的。<br>【root @www ~】# ls  </p></blockquote></li></ul><p>-a:全部的文件，联通隐藏的文件（开头为.的文件）<br>-l:长数据串列出，包含文件的属性与权限等等数据。<br>将目录下的所有文件列出来<br>【root@www ~】# ls -al ~<br>cd (切换目录)</p><ul><li>mkdir 【-p】 删除目录</li><li>rm  移除文件或目录 </li><li>mv 移动文件目录</li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Linux基本命令&quot;&gt;&lt;a href=&quot;#Linux基本命令&quot; class=&quot;headerlink&quot; title=&quot;Linux基本命令&quot;&gt;&lt;/a&gt;Linux基本命令&lt;/h1&gt;&lt;h3 id=&quot;1-基本命令&quot;&gt;&lt;a href=&quot;#1-基本命令&quot; class=&quot;head
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://github.com/liu-boss/liu-boss.github.io.git/2020/05/13/hello-world/"/>
+    <id>https://github.com/liu-boss/liu-boss.github.io.git/2020/05/13/hello-world/</id>
+    <published>2020-05-13T11:54:34.644Z</published>
+    <updated>2020-05-16T03:06:29.132Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
